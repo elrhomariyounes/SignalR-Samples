@@ -19,7 +19,7 @@ class App extends React.Component {
   }
   
   _hubConnection = new HubConnectionBuilder()
-  .withUrl("https://signalr-sample-server.azurewebsites.net/notificationhub")
+  .withUrl("BACKEND_AZURE_URL/notificationhub")
   .configureLogging(LogLevel.Debug)
   .build();
   async componentDidMount() {
