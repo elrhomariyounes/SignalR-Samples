@@ -1,0 +1,37 @@
+﻿@page "/"
+@using Microsoft.AspNetCore.SignalR.Client
+<h1>Hello, welcome to signalR Sample with blazor</h1>
+<h3>Connection Status : @connectionStatus</h3>
+<div>
+    <div class="row">
+        <div class="col-4">
+            @foreach (var item in notifications)
+            {
+                <div class="row">
+                    <h4>@item</h4>
+                </div>
+            }
+        </div>
+    </div>
+</div>
+@code{
+
+    //private readonly string serverUrl = "https://localhost:44387/notificationhub";
+    private readonly string serverUrl = "https://signalr-sample-server.azurewebsites.net/notificationhub";
+    private string connectionStatus = "Closed";
+    private HubConnection _connection = null;
+    private List<string> notifications = new List<string>();
+    protected async override Task OnInitializedAsync()
+    {
+        _connection = new HubConnectionBuilder().WithUrl(serverUrl).Build();
+        await _connection.StartAsync();
+        connectionStatus = "Connected !!";
+
+        _connection.On<string>("notification", n =>
+        {
+            notifications.Add(n);
+            StateHasChanged();
+        });
+    }
+}
+
