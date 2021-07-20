@@ -13,7 +13,7 @@
     "@aspnet/signalr": "^1.1.0",
     "@microsoft/signalr": "^3.1.5",
     "react": "16.11.0",
-    "react-native": "0.62.2",
+    "react-native": "0.62.3",
     "react-native-signalr": "^1.0.6"
   },
   "devDependencies": {
